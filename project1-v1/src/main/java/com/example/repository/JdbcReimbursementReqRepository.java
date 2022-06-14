@@ -35,6 +35,11 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
 
 
     public List<ExpReimbursementReq> findAll() {
+        return null;
+    }
+
+
+    /*public List<ExpReimbursementReq> findAll() {
         LOG.info("finding all expense reimbursement requests: ");
         try (Connection connection= SQLConnectionFactory.getConnection();){
 
@@ -54,5 +59,5 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
             LOG.error("error saving expense reimbursement request: ");
             e.printStackTrace();
         }
-    }
+    }*/
 }

@@ -19,9 +19,9 @@ public class JdbcEmployeeRepository implements EmployeeRepository{
         LOG.info("loading employee : "+number);
         try (Connection connection=SQLConnectionFactory.getConnection();){
 
-            String sql = "select * from accounts where emp_ID=?";
+            String sql = "select * from employees where emp_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, number);
+            ps.setInt(1, Integer.parseInt(number));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Employee employee = new Employee();
