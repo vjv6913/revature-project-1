@@ -7,7 +7,7 @@ import java.util.Objects;
 public class ExpReimbursementReq {
 
     private int id;
-    private int amount;
+    private double amount;
     private String reimReason;
     private ERStatus status;
     private LocalDateTime localDateTime;
@@ -22,7 +22,7 @@ public class ExpReimbursementReq {
         this.id = id;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
