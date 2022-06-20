@@ -1,0 +1,101 @@
+body {
+  background-color: #4a4545;
+}
+
+.displayed {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .5em;
+
+}
+
+.banner { 
+  text-align: center;
+  color: red;
+  font-size: 1.5em;
+  padding: .5em;
+}
+
+form {
+  background-color: red;
+  box-sizing: border-box;
+  width: 195px;
+  padding: 5px;
+  border: solid black;
+
+}
+
+.login{
+  width: 175px;
+  display: block;
+  text-align: center;
+}
+
+footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:1.5em;   /* Height of the footer */
+  background:#4a4545;
+}
+
+
+
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 960px;
+}
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+
+h1, h3, h4, h5, p {
+    margin-bottom: 22px;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0;
+}
+
+.btn-alt {
+    border: 1px solid #dfe2e5;
+    padding: 10px 30px;
+}
+
+/*
+  ========================================
+  Home
+  ========================================
+*/
+
+.hero {
+    padding: 22px 80px 66px 80px;
+}
