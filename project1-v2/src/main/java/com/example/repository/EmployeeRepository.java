@@ -8,9 +8,13 @@ import java.util.Optional;
 
 public interface EmployeeRepository {
 
+    boolean authenticate (String username);
+
     boolean authenticate (String username, String password);
     List<Employee> findAll();
     Optional<Employee> findByEmpID(String number);
+
+    Optional<Employee> findByEmpEmail(String email);
 
     void save(Employee employee);
     void update(Employee employee);

@@ -61,6 +61,7 @@ public class Application {
                 System.out.println("Please enter your password");
                 String password = s.nextLine();
                 EmployeeRepository jdbcEmpRepo = new JdbcEmployeeRepository();
+                System.out.println(jdbcEmpRepo.authenticate(username, password));
                 Optional<Employee> emp1 = jdbcEmpRepo.empAuthentication(username,password);
                 if(emp1.get()==null){
                     System.out.println("Your credentials could not be authenticated would you like to try again?");
@@ -77,8 +78,8 @@ public class Application {
                         System.out.println("a) Submit an Expense Reimbursement Request.");
                         System.out.println("b) View my pending open requests.");
                         System.out.println("c) View my resolved requests.");
-                        System.out.println("d) View my personal information.");
-                        System.out.println("e) Update my personal information.");
+                        //System.out.println("d) View my personal information.");
+                        //System.out.println("e) Update my personal information.");
                         System.out.println("f) Reset password.");
                         System.out.println("g) Logout.");
                         System.out.println("Please make a selection: ");

@@ -19,8 +19,117 @@ public class JdbcEmployeeRepository implements EmployeeRepository{
 
 
 
+   /* public boolean authenticate(String username, String password) {
+
+        LOG.info("loading employee : " + username + " to authenticate password.");
+            try (Connection connection = SQLConnectionFactory.getConnection();) {
+
+                String sql = "select * from employees where email=?";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, username);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    Employee employee = new Employee();
+                    employee.setEmp_ID(rs.getString("emp_id"));
+                    employee.setFirstName(rs.getString("firstname"));
+                    employee.setLastName(rs.getString("lastname"));
+                    employee.setEmail(rs.getString("email"));
+                    employee.setPhoneNum(rs.getString("phone_num"));
+                    employee.setAddress(rs.getString("address"));
+                    employee.setBirthDate(rs.getString("birthdate"));
+                    employee.setPassword(rs.getString("pw"));
+                    employee.setRole(EmpRole.valueOf(rs.getString("emprole")));
+
+                    if (BCrypt.verifyer().verify(password.toCharArray(), employee.getPassword()).verified) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } catch (SQLException e) {
+                LOG.error("error loading account: " + username + "for authentication");
+                e.printStackTrace();
+            }
+
+        return false;
+    }*/
+
+    public boolean authenticate(String username) {
+        LOG.info("loading employee : "+username +" to authenticate password.");
+        try (Connection connection=SQLConnectionFactory.getConnection();){
+
+            String sql = "select * from employees where email=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Employee employee = new Employee();
+                //employee.setEmp_ID(rs.getString("emp_id"));
+                //employee.setFirstName(rs.getString("firstname"));
+                //employee.setLastName(rs.getString("lastname"));
+                employee.setEmail(rs.getString("email"));
+                //employee.setPhoneNum(rs.getString("phone_num"));
+                //employee.setAddress(rs.getString("address"));
+                //employee.setBirthDate(rs.getString("birthdate"));
+                //employee.setPassword(rs.getString("pw"));
+                //employee.setRole(EmpRole.valueOf(rs.getString("emprole")));
+
+                if(username.equals(employee.getEmail()))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+        } catch (SQLException e) {
+            LOG.error("error loading account: "+username+ "for authentication");
+            e.printStackTrace();
+        }
+        System.out.println("Username not found");
+        return false;
+    }
+
     public boolean authenticate(String username, String password) {
-        //Employee= fin
+        LOG.info("loading employee : "+username +" to authenticate password.");
+        try (Connection connection=SQLConnectionFactory.getConnection();){
+
+            String sql = "select * from employees where email=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Employee employee = new Employee();
+                employee.setEmp_ID(rs.getString("emp_id"));
+                employee.setFirstName(rs.getString("firstname"));
+                employee.setLastName(rs.getString("lastname"));
+                employee.setEmail(rs.getString("email"));
+                employee.setPhoneNum(rs.getString("phone_num"));
+                employee.setAddress(rs.getString("address"));
+                employee.setBirthDate(rs.getString("birthdate"));
+                employee.setPassword(rs.getString("pw"));
+                employee.setRole(EmpRole.valueOf(rs.getString("emprole")));
+
+                if(BCrypt.verifyer().verify(password.toCharArray(),employee.getPassword()).verified)
+                {
+                    System.out.println("Authentication Successful");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+        } catch (SQLException e) {
+            LOG.error("error loading account: "+username+ "for authentication");
+            e.printStackTrace();
+        }
+        System.out.println("Username not found");
         return false;
     }
 
@@ -82,6 +191,35 @@ public class JdbcEmployeeRepository implements EmployeeRepository{
 
         } catch (SQLException e) {
             LOG.error("error loading account: "+number);
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Employee> findByEmpEmail(String email) {
+        LOG.info("loading employee : "+email);
+        try (Connection connection=SQLConnectionFactory.getConnection();){
+
+            String sql = "select * from employees where email=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Employee employee = new Employee();
+                employee.setEmp_ID(rs.getString("emp_id"));
+                employee.setFirstName(rs.getString("firstname"));
+                employee.setLastName(rs.getString("lastname"));
+                employee.setEmail(rs.getString("email"));
+                employee.setPhoneNum(rs.getString("phone_num"));
+                employee.setAddress(rs.getString("address"));
+                employee.setBirthDate(rs.getString("birthdate"));
+                employee.setPassword(rs.getString("pw"));
+                employee.setRole(EmpRole.valueOf(rs.getString("emprole")));
+                return Optional.of(employee);
+            }
+
+        } catch (SQLException e) {
+            LOG.error("error loading account: "+email);
             e.printStackTrace();
         }
         return Optional.empty();

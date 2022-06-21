@@ -1,0 +1,21 @@
+.jumbotron {
+    background-image: url('images/Jumbotronbg.png');
+    color: #FFF;
+    text-align: center;
+}
+.projectSummary {
+    text-align: center;
+}
+.nav-link {
+    color: #000;
+}
+.card-deck {
+    margin-top: 50px;
+}
+.table {
+    margin-bottom: 50px;
+}
+
+.projectSummary2 {
+    text-align: center;
+}
