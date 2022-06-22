@@ -26,6 +26,7 @@ public class Application {
             System.out.println("Type y for yes or n for no:");
             cont = s.nextLine();
             if (!(cont.equals("y") || cont.equals("n"))){
+
                 System.out.println("Your entry did not register");
             }else {
                 return cont;

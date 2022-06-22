@@ -1,3 +1,10 @@
+<%@ page import = "java.util.List"%>
+<%@ page import = "com.example.entity.Employee"%>
+<%@ page import = "com.example.entity.ExpReimbursementReq"%>
+
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -63,22 +70,30 @@
             <th scope="col">Last</th>
             <th scope="col">Amount</th>
             <th scope="col">Reason</th>
-            <th scope="col">Status</th>
-            <th scope="col">Date and Time</th>
             <th scope="col">Employee</th>
+            <th scope="col">Status</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">getReimbursementID</th>
-            <td>getFirstName</td>
-            <td>getLastName</td>
-            <td>getAmount</td>
-            <td>getReason</td>
-            <td>getStatus</td>
-            <td>getLocalDateTime</td>
-            <td>getEmployeeID</td>
-        </tr>
+        <%  %>
+         <%
+                      Employee empl = (Employee) request.getAttribute("emp");
+                      List<ExpReimbursementReq> allRec = (List<ExpReimbursementReq>) request.getAttribute("all-PENDING");
+                           for(ExpReimbursementReq requez:allRec){
+
+                   %>
+                 <tr>
+                     <td><%=requez.getId()%></td>
+                     <td><%=empl.getFirstName()%></td>
+                     <td><%=empl.getLastName()%></td>
+                     <td><%=requez.getAmount()%></td>
+                     <td><%=requez.getReimReason()%></td>
+                     <td><%=empl.getEmp_ID()%></td>
+                     <td><%=requez.getStatus()%></td>
+                 </tr>
+                    <%
+                            }
+                     %>
         </tbody>
     </table>
 </div>

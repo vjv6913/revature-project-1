@@ -108,6 +108,8 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
             expReimbursementReq.setEmployee((new JdbcEmployeeRepository()).findByEmpID(rs.getString("emp_id")).get());
             expReimbursementReqList.add(expReimbursementReq);
         }
+
+        System.out.println(expReimbursementReqList);
         return expReimbursementReqList;
     }
 
