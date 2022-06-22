@@ -2,6 +2,10 @@
 <%@ page import = "com.example.entity.Employee"%>
 <%@ page import = "com.example.entity.ExpReimbursementReq"%>
 
+<%
+Employee empl = (Employee) request.getAttribute("emp");
+%>
+
 
 
 
@@ -27,17 +31,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <%
+
+            if(empl.getRole().toString().equals("EMPLOYEE")) {
+
+
+            %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="employeeHome">Home</a>
+            </li>
+            <%
+                        }else if(empl.getRole().toString().equals("MANAGER")){
+            %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="managerHome.html">Home</a>
+            </li>
+            <%
+                }
+            %>
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="employeeHome">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="reimbursements">Reimbursements</a>
+                    <a class="nav-link" href="ViewReimbursement">Reimbursements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="submitRequest">Submit a Request</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="employeeInfo">View Info</a>
+                    <a class="nav-link" aria-current="page" href="employeeInfo">View Info</a>
                 </li>
             </ul>
             <ul class="d-flex ml-auto navbar-nav me-auto mb-2 mb-lg-0" >
@@ -60,6 +80,31 @@
     </div>
 </div>
 
+
+<div class="d-flex align-items-center justify-content-center">
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="ViewReimbursement">Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ViewResolved">Resolved</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="submitRequest">Submit a Request</a>
+                </li>
+
+        </div>
+    </div>
+</nav>
+</div>
+
+
+
+
 <div class="container">
     <table class="table table-bordered justify-content-center">
         <span class="border border-white"></span>
@@ -77,7 +122,7 @@
         <tbody>
         <%  %>
          <%
-                      Employee empl = (Employee) request.getAttribute("emp");
+
                       List<ExpReimbursementReq> allRec = (List<ExpReimbursementReq>) request.getAttribute("all-PENDING");
                            for(ExpReimbursementReq requez:allRec){
 

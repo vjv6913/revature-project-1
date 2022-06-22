@@ -76,13 +76,13 @@ public class Application {
                         ReimbursementReqRepository jdbcReimRepo = new JdbcReimbursementReqRepository();
                         ExpReimbursementReq req = new ExpReimbursementReq();
                         System.out.println("Please decide what you would like to do:");
-                        System.out.println("a) Submit an Expense Reimbursement Request.");
-                        System.out.println("b) View my pending open requests.");
-                        System.out.println("c) View my resolved requests.");
+                        //System.out.println("a) Submit an Expense Reimbursement Request.");
+                        //System.out.println("b) View my pending open requests.");
+                        //System.out.println("c) View my resolved requests.");
                         //System.out.println("d) View my personal information.");
                         //System.out.println("e) Update my personal information.");
-                        System.out.println("f) Reset password.");
-                        System.out.println("g) Logout.");
+                        //System.out.println("f) Reset password.");
+                        //System.out.println("g) Logout.");
                         System.out.println("Please make a selection: ");
                         cont = s.nextLine();
                         switch (cont){
@@ -162,10 +162,10 @@ public class Application {
                         System.out.println("b) View all employees.");
                         System.out.println("c) View resolved employee requests.");
                         System.out.println("d) View pending employee requests.");
-                        System.out.println("e) View my personal information:");
-                        System.out.println("f) Update my personal information.");
+                        //System.out.println("e) View my personal information:");
+                        //System.out.println("f) Update my personal information.");
                         System.out.println("g) Reset password.");
-                        System.out.println("h) Logout.");
+                        //System.out.println("h) Logout.");
                         System.out.println("Please make a selection: ");
                         cont = s.nextLine();
                         switch (cont){

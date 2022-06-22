@@ -2,6 +2,10 @@
 <%@ page import = "java.util.List"%>
 <%@ page import = "com.example.entity.Employee"%>
 
+<%
+      Employee empl = (Employee) request.getAttribute("emp");
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,9 +28,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="employeeHome">Home</a>
-                </li>
+            <%
+
+            if(empl.getRole().toString().equals("EMPLOYEE")) {
+
+
+            %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="employeeHome">Home</a>
+            </li>
+            <%
+                        }else if(empl.getRole().toString().equals("MANAGER")){
+            %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="managerHome.html">Home</a>
+            </li>
+            <%
+                }
+            %>
+
                 <li class="nav-item">
                     <a class="nav-link" href="ViewReimbursement">Reimbursements</a>
                 </li>
@@ -72,10 +92,7 @@
     </tr>
     </thead>
     <tbody>
-        <%
-            Employee empl = (Employee) request.getAttribute("emp");
 
-        %>
     <tr>
         <td><%=empl.getEmp_ID()%></td>
         <td><%=empl.getFirstName()%></td>

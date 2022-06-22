@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/SubmitReimbursement", "/ViewReimbursement"})
+@WebServlet(urlPatterns = {"/SubmitReimbursement", "/ViewReimbursement", "/ViewResolved"})
 public class ReimServlet extends HttpServlet {
 
     private static final Logger LOG= Logger.getLogger("ers"); // Logger is a singleton obj.
@@ -71,6 +71,7 @@ public class ReimServlet extends HttpServlet {
                 try {
 
                     List<ExpReimbursementReq> allRec = jdbcReimRepo.findAllByStatusForEmployee("PENDING", Integer.parseInt(emp.getEmp_ID()));
+
                     System.out.println(allRec);
 
                     req.setAttribute("all-PENDING", allRec);
@@ -88,6 +89,34 @@ public class ReimServlet extends HttpServlet {
 
 
             }
+
+
+            if (reURI.equals("/project1-v2/ViewResolved")) {
+
+                try {
+
+                    List<ExpReimbursementReq> allRec = jdbcReimRepo.findAllResolvedForEmployee(Integer.parseInt(emp.getEmp_ID()));
+                    System.out.println(allRec);
+
+                    req.setAttribute("all-PENDING", allRec);
+                    req.setAttribute("emp", emp);
+
+                    req.getRequestDispatcher("employeeReimbursements.jsp").forward(req, resp);
+                }catch (NullPointerException e) {
+
+                    LOG.error("error getting list or reimbursements requests by status for empID: ");
+                    resp.sendRedirect("employeeHome.jsp");
+
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+
+
+
 
         } else {
             resp.sendRedirect("index.html");

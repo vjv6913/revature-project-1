@@ -1,5 +1,17 @@
+<%@ page import = "java.util.List"%>
+<%@ page import = "com.example.entity.Employee"%>
+
+<%
+      Employee empl = (Employee) request.getAttribute("emp");
+%>
+
+
+
+
 <!doctype html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,6 +22,7 @@
     <title>Reimbursement Request Form</title>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
@@ -19,28 +32,48 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="employeeHome">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="reimbursements">Reimbursements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="submitRequest">Submit a Request</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="employeeInfo">View Info</a>
-                        </li>
-                    </ul>
-                    <ul class="d-flex ml-auto navbar-nav me-auto mb-2 mb-lg-0" >
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <%
+
+            if(empl.getRole().toString().equals("EMPLOYEE")) {
+
+
+            %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="employeeHome">Home</a>
+            </li>
+            <%
+                        }else if(empl.getRole().toString().equals("MANAGER")){
+            %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="managerHome.html">Home</a>
+            </li>
+            <%
+                }
+            %>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="ViewReimbursement">Reimbursements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="submitRequest">Submit a Request</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="employeeInfo">View Info</a>
+                </li>
+            </ul>
+            <ul class="d-flex ml-auto navbar-nav me-auto mb-2 mb-lg-0" >
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
         <div class="jumbotron">
             <h1 class="display-4">Submit a Reimbursement Request</h1>
         </div>

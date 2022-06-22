@@ -48,7 +48,8 @@ public class HeaderServlet extends HttpServlet{
                 resp.sendRedirect("employeeHome.html");
             }
             if (reURI.equals("/project1-v2/submitRequest")) {
-                resp.sendRedirect("employeeSubmitRequest.jsp");
+                req.getRequestDispatcher("employeeSubmitRequest.jsp").forward(req, resp);
+                //resp.sendRedirect("employeeSubmitRequest.jsp");
             }
             if (reURI.equals("/project1-v2/employeeInfo")) {
                 req.getRequestDispatcher("employeeInformation.jsp").forward(req, resp);
