@@ -29,8 +29,9 @@ public class EmpServlet extends HttpServlet {
 
     EmployeeRepository jdbcEmpRepo = new JdbcEmployeeRepository();
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  ServletException, IOException {
+        resp.sendRedirect("managerRegisterEmployee.jsp");
+        //doPost(req,resp);
 
     }
 
@@ -117,14 +118,19 @@ public class EmpServlet extends HttpServlet {
                     String email = req.getParameter("email");
                     String role = req.getParameter("role");
 
+
                     if (role.equals("1")) {
                         Employee emp9 = new Employee(fname, lname, email, "EMPLOYEE");
                         try {
                             jdbcEmpRepo.save(emp9);
-                        }catch (NullPointerException e){
+                        }catch (Throwable e){
+                            System.out.println(e.getMessage());
                             resp.sendRedirect("registrationFailed.html");
+
+                            return;
                         }
                         JavaMailUtil.sendMail(emp9);
+
                         resp.sendRedirect("registrationSuccessful.html");
 
 
@@ -133,8 +139,9 @@ public class EmpServlet extends HttpServlet {
 
                         try {
                             jdbcEmpRepo.save(emp9);
-                        }catch (NullPointerException e){
+                        }catch (Throwable e){
                             resp.sendRedirect("registrationFailed.html");
+                            return;
                         }
                         JavaMailUtil.sendMail(emp9);
                         resp.sendRedirect("registrationSuccessful.html");
@@ -147,7 +154,7 @@ public class EmpServlet extends HttpServlet {
                 }catch (NullPointerException e) {
 
                     LOG.error("error getting to register employee: ");
-                    req.getRequestDispatcher("managerRegisterEmployee.jsp").forward(req, resp);
+                    req.getRequestDispatcher("registrationFailed.html").forward(req, resp);
 
                     e.printStackTrace();
                 }

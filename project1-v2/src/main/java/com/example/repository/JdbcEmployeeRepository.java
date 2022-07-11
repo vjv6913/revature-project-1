@@ -225,7 +225,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository{
         return Optional.empty();
     }
 
-    public void save(Employee employee) {
+    public void save(Employee employee) throws SQLException{
 
         LOG.info("saving new employee :");
         try (Connection connection=SQLConnectionFactory.getConnection();){
@@ -242,7 +242,8 @@ public class JdbcEmployeeRepository implements EmployeeRepository{
 
         } catch (SQLException e) {
             LOG.error("error updating employee: "+employee.getEmp_ID());
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw e;
         }
 
     }

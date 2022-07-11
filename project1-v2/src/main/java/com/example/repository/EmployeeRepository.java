@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.entity.Employee;
 import com.example.entity.ExpReimbursementReq;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public interface EmployeeRepository {
 
     Optional<Employee> findByEmpEmail(String email);
 
-    void save(Employee employee);
+    void save(Employee employee) throws SQLException;
     void update(Employee employee);
 
     Optional<Employee> empAuthentication(String username, String password);
