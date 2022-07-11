@@ -14,6 +14,7 @@ Employee empl = (Employee) request.getAttribute("emp");
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="main.css">
     <title>Manager - View All Requests</title>
 </head>
@@ -53,6 +54,7 @@ Employee empl = (Employee) request.getAttribute("emp");
         </div>
     </div>
 </nav>
+
 
 <div class="jumbotron">
     <h1 class="display-4">View All Employee Reimbursement Requests</h1>
@@ -98,6 +100,9 @@ Employee empl = (Employee) request.getAttribute("emp");
             <th scope="col">Reason</th>
             <th scope="col">Employee ID</th>
             <th scope="col">Status</th>
+            <th>Approve</th>
+            <th>Deny</th>
+
         </tr>
         </thead>
         <tbody>
@@ -116,6 +121,9 @@ Employee empl = (Employee) request.getAttribute("emp");
                      <td><%=requez.getReimReason()%></td>
                      <td><%=requez.getEmployee().getEmp_ID()%></td>
                      <td><%=requez.getStatus()%></td>
+                     <td><a href="approve-request?id=<%=requez.getId()%>"><i style="cursor: pointer" class="fa-solid fa-thumbs-up"></i></a></td>
+                     <td><a href="deny-request?id=<%=requez.getId()%>"><i style="cursor: pointer" class="fa-solid fa-thumbs-down"></i></a></td>
+
                  </tr>
                     <%
                             }

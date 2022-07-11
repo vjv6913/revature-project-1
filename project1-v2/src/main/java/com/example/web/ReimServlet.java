@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/SubmitReimbursement", "/ViewReimbursement", "/ViewResolved"})
+@WebServlet(urlPatterns = {"/SubmitReimbursement", "/ViewReimbursement", "/ViewResolved", "/ViewAllReimbursement", "/ViewAllPending", "/ViewAllResolved", "/approve-request", "/deny-request"})
 public class ReimServlet extends HttpServlet {
 
     private static final Logger LOG= Logger.getLogger("ers"); // Logger is a singleton obj.
@@ -32,6 +32,44 @@ public class ReimServlet extends HttpServlet {
     EmployeeRepository jdbcEmpRepo = new JdbcEmployeeRepository();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+        String reURI = req.getRequestURI();
+
+        if (reURI.equals("/project1-v2/approve-request")) {
+            try {
+
+                int id=Integer.parseInt(req.getParameter("id"));
+                jdbcReimRepo.updateStatus(id,"APPROVED");
+                resp.sendRedirect("ViewAllPending");
+
+            }catch (NullPointerException e) {
+
+                LOG.error("error getting list or reimbursements requests by status for empID: ");
+                resp.sendRedirect("managerHome.html");
+
+                e.printStackTrace();
+            }
+        }
+
+        if (reURI.equals("/project1-v2/deny-request")) {
+            try {
+
+                int id=Integer.parseInt(req.getParameter("id"));
+                jdbcReimRepo.updateStatus(id,"DENIED");
+                resp.sendRedirect("ViewAllPending");
+
+            }catch (NullPointerException e) {
+
+                LOG.error("error getting list or reimbursements requests by status for empID: ");
+                resp.sendRedirect("managerHome.html");
+
+                e.printStackTrace();
+            }
+        }
+
+
+
         doPost(req, resp);
 
     }
@@ -51,6 +89,8 @@ public class ReimServlet extends HttpServlet {
             String reURI = req.getRequestURI();
 
             if (reURI.equals("/project1-v2/SubmitReimbursement")) {
+
+                req.setAttribute("emp", emp);
 
 
                 String amount = req.getParameter("amount");
@@ -90,6 +130,78 @@ public class ReimServlet extends HttpServlet {
 
             }
 
+            if (reURI.equals("/project1-v2/ViewAllReimbursement")) {
+
+                try {
+
+                    List<ExpReimbursementReq> allRec = jdbcReimRepo.findAll();
+
+                    System.out.println(allRec);
+
+                    req.setAttribute("all-Requests", allRec);
+                    req.setAttribute("emp", emp);
+
+                    req.getRequestDispatcher("managerViewAllReimbursements.jsp").forward(req, resp);
+                }catch (NullPointerException e) {
+
+                    LOG.error("error getting list or reimbursements requests by status for empID: ");
+                    resp.sendRedirect("employeeHome.jsp");
+
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+            if (reURI.equals("/project1-v2/ViewAllPending")) {
+
+                try {
+
+                    List<ExpReimbursementReq> allRec = jdbcReimRepo.findAllByStatus("PENDING");
+
+                    System.out.println(allRec);
+
+                    req.setAttribute("all-Requests", allRec);
+                    req.setAttribute("emp", emp);
+
+                    req.getRequestDispatcher("managerViewAllPending.jsp").forward(req, resp);
+                }catch (NullPointerException e) {
+
+                    LOG.error("error getting list or reimbursements requests by status for empID: ");
+                    resp.sendRedirect("managerHome.jsp");
+
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+            if (reURI.equals("/project1-v2/ViewAllResolved")) {
+
+                try {
+
+                    List<ExpReimbursementReq> allRec = jdbcReimRepo.findAllResolved();
+
+                    System.out.println(allRec);
+
+                    req.setAttribute("all-Requests", allRec);
+                    req.setAttribute("emp", emp);
+
+                    req.getRequestDispatcher("managerViewAllReimbursements.jsp").forward(req, resp);
+                }catch (NullPointerException e) {
+
+                    LOG.error("error getting list or reimbursements requests by status for empID: ");
+                    resp.sendRedirect("employeeHome.jsp");
+
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
 
             if (reURI.equals("/project1-v2/ViewResolved")) {
 
@@ -113,6 +225,7 @@ public class ReimServlet extends HttpServlet {
 
 
             }
+
 
 
 

@@ -172,21 +172,22 @@
                                     <div class="card-header" width=>Reset Password</div>
                                     <div class="card-body">
                                         <form action="resetPW" method="post">
-                                                            <div>
-                                                                <label class="form-label">Enter Current Password</label>
-                                                                <input name="currPW" class="form-control"/>
-                                                            </div>
-                                                            <div>
-                                                                <label class="form-label">Enter New Password</label>
-                                                                <input name="newPW" class="form-control"/>
-                                                            </div>
-                                                            <div>
-                                                                <label class="form-label">Re-Enter New Password</label>
-                                                                <input name="reNewPW" class="form-control"/>
-                                                            </div>
-                                                            <br/>
-                                                            <button class="btn btn-primary">Update Password</button>
-                                        </form>
+                                                                                                    <div>
+                                                                                                        <label class="form-label">Enter Current Password</label>
+                                                                                                        <input type="password" name="currPW" class="form-control"/>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <label class="form-label">Enter New Password</label>
+                                                                                                        <input type="password" name="newPW" class="form-control"/>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <label class="form-label">Re-Enter New Password</label>
+                                                                                                        <input type="password" name="reNewPW" class="form-control"/>
+                                                                                                    </div>
+                                                                                                    <br/>
+                                                                                                    <button class="btn btn-primary">Update Password</button>
+                                                                                </form>
+
                                     </div>
                                 </div>
                             </div>

@@ -40,7 +40,7 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
         List<ExpReimbursementReq> expReimbursementReqList = new ArrayList<>();
         try (Connection connection= SQLConnectionFactory.getConnection();){
 
-            String sql = "select * from expreimrequest";
+            String sql = "select * from expreimrequest order by emp_id ASC, request_id ASC";
             Statement ps = connection.createStatement();
             ResultSet rs= ps.executeQuery(sql);
 
@@ -67,16 +67,17 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
 
         List<ExpReimbursementReq> expReimbursementReqList = new ArrayList<>();
         try (Connection connection= SQLConnectionFactory.getConnection();){
+            String sql;
 
             ResultSet rs;
 
             if(empID==-1) {
-                String sql="select * from expreimrequest where status=?";
+                sql="select * from expreimrequest where status=? order by emp_id ASC, request_id ASC";
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setString(1,status);
                 rs= ps.executeQuery();
             }else {
-                String sql="select * from expreimrequest where status=? and emp_id=?";
+                sql="select * from expreimrequest where status=? and emp_id=? order by emp_id ASC, request_id ASC";
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setString(1,status);
                 ps.setInt(2,empID);
@@ -125,11 +126,11 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
         try (Connection connection= SQLConnectionFactory.getConnection();){
             String sql;
             if(empID==-1) {
-                sql = "select * from expreimrequest where status!='PENDING'";
+                sql = "select * from expreimrequest where status!='PENDING' order by emp_id ASC, request_id ASC";
                 Statement ps = connection.createStatement();
                 rs = ps.executeQuery(sql);
             }else {
-                sql = "select * from expreimrequest where status!='PENDING' and emp_id=?";
+                sql = "select * from expreimrequest where status!='PENDING' and emp_id=? order by emp_id ASC, request_id ASC";
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setInt(1, empID);
                 rs= ps.executeQuery();
@@ -145,23 +146,25 @@ public class JdbcReimbursementReqRepository implements ReimbursementReqRepositor
         return expReimbursementReqList;
     }
 
-    public void updateStatus(ExpReimbursementReq expReimbursementReq, String status) {
+    public void updateStatus(int expReimbursementReq, String status) {
 
-        LOG.info("updating expense reimbursement request status : "+expReimbursementReq.getId());
+        LOG.info("updating expense reimbursement request status : "+expReimbursementReq);
         try (Connection connection=SQLConnectionFactory.getConnection();){
 
             String sql = "update expreimrequest set status=? where request_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,status);
-            ps.setInt(2, expReimbursementReq.getId());
+            ps.setInt(2, expReimbursementReq);
             int rows = ps.executeUpdate();
 
 
         } catch (SQLException e) {
-            LOG.error("error updating expense reimbursement request status : "+expReimbursementReq.getId());
+            LOG.error("error updating expense reimbursement request status : "+expReimbursementReq);
             e.printStackTrace();
         }
 
     }
+
+
 
 }

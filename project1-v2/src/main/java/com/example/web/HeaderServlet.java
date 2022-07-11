@@ -93,51 +93,6 @@ public class HeaderServlet extends HttpServlet{
     }
 
 
-    /*protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //read input params from http-request
-
-        HttpSession session = req.getSession();
-        System.out.println(session.isNew());
-        System.out.println(session.getId());
-        System.out.println(new Date(session.getCreationTime()));
-        System.out.println(new Date(session.getLastAccessedTime()));
-
-        String currentUser = (String) session.getAttribute("username");
-
-        System.out.println(currentUser);
-
-
-        boolean b = jdbcEmpRepo.authenticate(currentUser);
-        if (!b) {
-            resp.sendRedirect("index.html");
-        } else {
-            Optional<Employee> emp = jdbcEmpRepo.findByEmpEmail(currentUser);
-
-            if (emp.get().getRole().toString().equals("EMPLOYEE")) {
-                //resp.sendRedirect("WEB-INF/employeeHome.html");
-                req.getRequestDispatcher("WEB-INF/employeeHome.html").forward(req, resp);
-            } else if (emp.get().getRole().toString().equals("MANAGER")) {
-                //resp.sendRedirect("WEB-INF/managerHome.html");
-                req.getRequestDispatcher("WEB-INF/managerHome.html").forward(req, resp);
-            } else {
-                resp.sendRedirect("index.html");
-            }
-        }
-
-        //resp.sendRedirect("employeeHome.html");
-
-
-        String message = "Hello " + uName + pw;
-
-        //generate http-response
-
-        //resp.setContentType("text/html");
-
-        req.setAttribute("message", message);
-
-        req.getRequestDispatcher("login-response.jsp").forward(req, resp);
-
-    }*/
 
 }

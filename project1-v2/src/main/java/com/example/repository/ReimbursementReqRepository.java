@@ -1,6 +1,5 @@
 package com.example.repository;
 
-import com.example.entity.Employee;
 import com.example.entity.ExpReimbursementReq;
 
 import java.util.List;
@@ -19,5 +18,5 @@ public interface ReimbursementReqRepository {
 
     List<ExpReimbursementReq> findAllResolvedForEmployee(int empID);
 
-    void updateStatus(ExpReimbursementReq expReimbursementReq, String status);
+    void updateStatus(int expReimbursementReq, String status);
 }
